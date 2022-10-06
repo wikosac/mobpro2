@@ -12,8 +12,10 @@ import org.d3if4097.mobpro2.model.Harian
 
 class MainViewModel : ViewModel() {
     private val data = MutableLiveData<List<Harian>>()
+    private val status = MutableLiveData<ApiStatus>()
 
     fun getData(): LiveData<List<Harian>> = data
+    fun getStatus(): LiveData<ApiStatus> = status
 
     init {
         viewModelScope.launch {
@@ -24,11 +26,13 @@ class MainViewModel : ViewModel() {
     }
     private suspend fun requestData() {
         try {
+            status.postValue(ApiStatus.LOADING)
             val result = Covid19Api.service.getData()
             data.postValue(result.update.harian)
+            status.postValue(ApiStatus.SUCCESS)
         }
         catch (e: Exception) {
-            Log.d("REQUEST", e.message.toString())
+            status.postValue(ApiStatus.FAILED)
         }
     }
 }
