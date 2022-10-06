@@ -54,4 +54,9 @@ dependencies {
     // moshi
     implementation 'com.squareup.moshi:moshi:1.9.2'
     implementation 'com.squareup.moshi:moshi-kotlin:1.9.2'
+
+    // live data
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    // recycler view
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 }
