@@ -11,6 +11,11 @@ import java.util.*
 class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     private val formatter = SimpleDateFormat("dd MMMM", Locale("ID", "id"))
     private val data = mutableListOf<Harian>()
+
+    fun getDate(position: Int): Date {
+        return Date(data[position].key)
+    }
+
     fun setData(newData: List<Harian>) {
         data.clear()
         data.addAll(newData)
