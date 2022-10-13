@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">MobPro2</string>
+    <string name="app_name">Login Firebase</string>
+    <string name="login">Login</string>
 </resources>
