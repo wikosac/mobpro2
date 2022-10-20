@@ -1,5 +1,6 @@
 package org.d3if4097.mobpro2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -113,7 +114,7 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_maps) {
-            Log.d("MAPS", "Menu maps diklik!")
+            startActivity(Intent(this, MapsActivity::class.java))
             return true
         }
         return super.onOptionsItemSelected(item)
