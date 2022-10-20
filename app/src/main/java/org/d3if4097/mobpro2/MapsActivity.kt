@@ -1,10 +1,14 @@
 package org.d3if4097.mobpro2
 
+import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -19,6 +23,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private val viewModel: MapsViewModel by lazy {
         ViewModelProvider(this).get(MapsViewModel::class.java)
+    }
+
+    companion object {
+        private const val REQUEST_LOCATION_PERMISSION = 1
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +48,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val lokasi = LatLng(-6.920432082789247, 107.60370834146391)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(lokasi, 7f))
+
+        enableMyLocation()
     }
 
     private fun createMarker(prov: Provinsi) {
@@ -76,4 +86,32 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         else -> super.onOptionsItemSelected(item)
     }
 
+    @SuppressLint("MissingPermission")
+    private fun enableMyLocation() {
+        if (ActivityCompat.checkSelfPermission(this.applicationContext,
+                ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED) {
+            map.isMyLocationEnabled = true
+        }
+        else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(ACCESS_FINE_LOCATION),
+                REQUEST_LOCATION_PERMISSION
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResult: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResult)
+        if (requestCode == REQUEST_LOCATION_PERMISSION) {
+            if (grantResult.isNotEmpty() &&
+                grantResult[0] == PackageManager.PERMISSION_GRANTED) {
+                enableMyLocation()
+            }
+        }
+    }
 }
