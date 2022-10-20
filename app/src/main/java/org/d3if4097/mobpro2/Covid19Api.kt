@@ -3,6 +3,7 @@ package org.d3if4097.mobpro2
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.d3if4097.mobpro2.model.Data
+import org.d3if4097.mobpro2.model.ListProvinsi
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -24,5 +25,8 @@ object Covid19Api {
     interface ApiService {
         @GET("update.json")
         suspend fun getData(): Data
+
+        @GET("prov.json")
+        suspend fun getProvinsi(): ListProvinsi
     }
 }
