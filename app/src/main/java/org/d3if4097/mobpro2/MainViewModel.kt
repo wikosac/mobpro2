@@ -1,5 +1,6 @@
 package org.d3if4097.mobpro2
 
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +16,15 @@ class MainViewModel(private val db : MahasiswaDao) : ViewModel() {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 db.insertData(mahasiswa)
+            }
+        }
+    }
+
+    fun deleteData(ids: List<Int>) {
+        val newIds = ids.toList()
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                db.deleteData(newIds)
             }
         }
     }

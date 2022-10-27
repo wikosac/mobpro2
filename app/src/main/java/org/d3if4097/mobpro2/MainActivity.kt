@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.ActionMode
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -65,10 +66,19 @@ class MainActivity : AppCompatActivity(), MainDialog.DialogListener {
         }
     }
 
-    private fun deleteData() {
-        Log.d("MainActivity", "Delete clicked!"  + myAdapter.getSelection())
-        actionMode?.finish()
+    private fun deleteData() = AlertDialog.Builder(this).apply {
+        setMessage(R.string.pesan_hapus)
+        setPositiveButton(R.string.hapus) { _, _ ->
+            viewModel.deleteData(myAdapter.getSelection())
+            actionMode?.finish()
+        }
+        setNegativeButton(R.string.batal) { dialog, _ ->
+            dialog.cancel()
+            actionMode?.finish()
+        }
+        show()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
