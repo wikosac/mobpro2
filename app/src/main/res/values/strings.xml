@@ -11,4 +11,5 @@
     <string name="hapus">Hapus</string>
     <string name="mahasiswa_klik">%1$s diklik!</string>
     <string name="pesan_hapus">Hapus mahasiswa terpilih?</string>
+    <string name="tidak_ada_data">Tidak ada data</string>
 </resources>

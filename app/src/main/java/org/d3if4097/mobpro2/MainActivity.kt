@@ -6,6 +6,7 @@ import android.util.Log
 
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.ActionMode
@@ -95,7 +96,11 @@ class MainActivity : AppCompatActivity(), MainDialog.DialogListener {
             setHasFixedSize(true)
             adapter = myAdapter
         }
-        viewModel.data.observe(this, { myAdapter.submitList(it) })
+        viewModel.data.observe(this, {
+            myAdapter.submitList(it)
+            binding.emptyView.visibility = if (it.isEmpty()) View.VISIBLE
+            else View.GONE
+        })
     }
 
     private val viewModel: MainViewModel by lazy {
