@@ -8,7 +8,10 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import org.junit.Assert.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import org.d3if4097.mobpro2.data.Mahasiswa
+import org.d3if4097.mobpro2.data.MahasiswaDb
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -19,6 +22,14 @@ class MainActivityTest {
             0, "6706180001", "Tika Aulia Utami"
         )
     }
+
+    @Before
+    fun setUp() {
+// Lakukan penghapusan database setiap kali test akan dijalankan.
+        InstrumentationRegistry.getInstrumentation().targetContext
+            .deleteDatabase(MahasiswaDb.DATABASE_NAME)
+    }
+
     @Test
     fun testInsert() {
 // Jalankan MainActivity
