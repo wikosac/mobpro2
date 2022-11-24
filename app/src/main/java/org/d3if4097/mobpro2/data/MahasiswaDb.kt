@@ -13,9 +13,7 @@ class MahasiswaDb private constructor() {
             database.push().setValue(mahasiswa)
         }
         override fun getData(): LiveData<List<Mahasiswa>> {
-            val data = MutableLiveData<List<Mahasiswa>>()
-            data.value = ArrayList()
-            return data
+            return MahasiswaLiveData(database)
         }
         override fun deleteData(ids: List<String>) {
         }
