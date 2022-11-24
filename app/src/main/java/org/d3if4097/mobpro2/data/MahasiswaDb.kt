@@ -16,6 +16,7 @@ class MahasiswaDb private constructor() {
             return MahasiswaLiveData(database)
         }
         override fun deleteData(ids: List<String>) {
+            ids.forEach { database.child(it).removeValue() }
         }
     }
     companion object {
