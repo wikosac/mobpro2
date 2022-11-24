@@ -17,7 +17,7 @@ class MahasiswaDb private constructor() {
             data.value = ArrayList()
             return data
         }
-        override fun deleteData(ids: List<Int>) {
+        override fun deleteData(ids: List<String>) {
         }
     }
     companion object {

@@ -8,5 +8,5 @@ interface MahasiswaDao {
 
     fun getData(): LiveData<List<Mahasiswa>>
 
-    fun deleteData(ids: List<Int>)
+    fun deleteData(ids: List<String>)
 }
