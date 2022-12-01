@@ -1,4 +1,4 @@
-package org.d3if4097.mobpro2
+package org.d3if4097.mobpro2.ui.detail
 
 
 import androidx.lifecycle.ViewModel

@@ -1,13 +1,13 @@
-package org.d3if4097.mobpro2
+package org.d3if4097.mobpro2.ui.detail
 
 import android.app.Dialog
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import org.d3if4097.mobpro2.R
 import org.d3if4097.mobpro2.data.Mahasiswa
 import org.d3if4097.mobpro2.databinding.DialogMainBinding
 
