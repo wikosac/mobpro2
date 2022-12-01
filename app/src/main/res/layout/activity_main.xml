@@ -2,7 +2,7 @@
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainFragment"
-    android:name="org.d3if4097.mobpro2.ui.detail.MainFragment"
+    android:name="org.d3if4097.mobpro2.ui.master.KelasFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
