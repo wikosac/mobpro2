@@ -15,7 +15,7 @@ import org.d3if4097.mobpro2.data.Mahasiswa
 import org.d3if4097.mobpro2.data.MahasiswaDb
 import org.d3if4097.mobpro2.databinding.FragmentMainBinding
 
-class MainFragment : Fragment(), MainDialog.DialogListener {
+class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var myAdapter: MainAdapter
     private var actionMode: ActionMode? = null
@@ -106,10 +106,7 @@ class MainFragment : Fragment(), MainDialog.DialogListener {
     private val viewModel: MainViewModel by lazy {
         val dataSource = MahasiswaDb.getInstance(requireContext()).dao
         val factory = MainViewModelFactory(dataSource)
-        ViewModelProvider(this, factory).get(MainViewModel::class.java)
-    }
-
-    override fun processDialog(mahasiswa: Mahasiswa) {
-        viewModel.insertData(mahasiswa)
+        ViewModelProvider(requireActivity(), factory)
+            .get(MainViewModel::class.java)
     }
 }

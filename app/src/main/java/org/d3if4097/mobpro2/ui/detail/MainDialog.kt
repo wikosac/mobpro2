@@ -7,12 +7,21 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 import org.d3if4097.mobpro2.R
 import org.d3if4097.mobpro2.data.Mahasiswa
+import org.d3if4097.mobpro2.data.MahasiswaDb
 import org.d3if4097.mobpro2.databinding.DialogMainBinding
 
 class MainDialog : DialogFragment() {
     private lateinit var binding: DialogMainBinding
+
+    private val viewModel: MainViewModel by lazy {
+        val dataSource = MahasiswaDb.getInstance(requireContext()).dao
+        val factory = MainViewModelFactory(dataSource)
+        ViewModelProvider(requireActivity(), factory)
+            .get(MainViewModel::class.java)
+    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val inflater = LayoutInflater.from(requireContext())
@@ -22,16 +31,11 @@ class MainDialog : DialogFragment() {
             setView(binding.root)
             setPositiveButton(R.string.simpan) { _, _ ->
                 val mahasiswa = getData() ?: return@setPositiveButton
-                val listener = requireActivity() as DialogListener
-                listener.processDialog(mahasiswa)
+                viewModel.insertData(mahasiswa)
             }
             setNegativeButton(R.string.batal) { _, _ -> dismiss() }
         }
         return builder.create()
-    }
-
-    interface DialogListener {
-        fun processDialog(mahasiswa: Mahasiswa)
     }
 
     private fun getData(): Mahasiswa? {
