@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/kelasFragment">
+
+    <fragment
+        android:id="@+id/kelasFragment"
+        android:name="org.d3if4097.mobpro2.ui.master.KelasFragment"
+        android:label="KelasFragment"
+        tools:layout="@layout/fragment_kelas" >
+        <action
+            android:id="@+id/action_kelasFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="org.d3if4097.mobpro2.ui.detail.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_mainDialog"
+            app:destination="@id/mainDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/mainDialog"
+        android:name="org.d3if4097.mobpro2.ui.detail.MainDialog"
+        android:label="MainDialog"
+        tools:layout="@layout/dialog_main" />
+</navigation>

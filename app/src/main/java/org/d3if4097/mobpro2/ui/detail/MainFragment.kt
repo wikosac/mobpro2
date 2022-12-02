@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.ActionMode
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import org.d3if4097.mobpro2.R
@@ -87,7 +88,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.fab.setOnClickListener {
-            MainDialog().show(requireActivity().supportFragmentManager, "MainDialog")
+            findNavController().navigate(R.id.action_mainFragment_to_mainDialog)
         }
 
         myAdapter = MainAdapter(handler)
