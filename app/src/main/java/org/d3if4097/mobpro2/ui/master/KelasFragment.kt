@@ -24,7 +24,9 @@ class KelasFragment : Fragment() {
         binding.listView.adapter = ArrayAdapter(requireContext(),
             android.R.layout.simple_list_item_1, android.R.id.text1, kelas)
         binding.listView.setOnItemClickListener { _, _, pos, _ ->
-            findNavController().navigate(R.id.action_kelasFragment_to_mainFragment)
+            findNavController().navigate(
+                KelasFragmentDirections.actionKelasFragmentToMainFragment(kelas[pos])
+            )
         }
     }
 }

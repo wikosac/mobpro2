@@ -1,5 +1,4 @@
 pluginManagement {
-    ext.nav_version = "2.5.3"
     repositories {
         gradlePluginPortal()
         google()
