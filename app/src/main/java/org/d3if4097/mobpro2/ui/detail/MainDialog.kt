@@ -26,9 +26,6 @@ class MainDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog
     {
-        val args = MainDialogArgs.fromBundle(requireArguments())
-        Log.d("KELAS", args.kelas)
-
         val inflater = LayoutInflater.from(requireContext())
         binding = DialogMainBinding.inflate(inflater, null, false)
         val builder = AlertDialog.Builder(requireContext()).apply {
@@ -57,9 +54,11 @@ class MainDialog : DialogFragment() {
             return null
         }
 
+        val args = MainDialogArgs.fromBundle(requireArguments())
         return Mahasiswa(
             nim = binding.nimEditText.text.toString(),
-            nama = binding.namaEditText.text.toString()
+            nama = binding.namaEditText.text.toString(),
+            kelas = args.kelas
         )
     }
 

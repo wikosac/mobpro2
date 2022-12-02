@@ -102,7 +102,7 @@ class MainFragment : Fragment() {
             setHasFixedSize(true)
             adapter = myAdapter
         }
-        viewModel.data.observe(viewLifecycleOwner, {
+        viewModel.getData(args.kelas).observe(viewLifecycleOwner, {
             myAdapter.submitList(it)
             binding.emptyView.visibility = if (it.isEmpty()) View.VISIBLE
             else View.GONE
