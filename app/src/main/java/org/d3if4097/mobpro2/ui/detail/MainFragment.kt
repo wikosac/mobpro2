@@ -115,4 +115,9 @@ class MainFragment : Fragment() {
         ViewModelProvider(requireActivity(), factory)
             .get(MainViewModel::class.java)
     }
+
+    override fun onDestroy() {
+        actionMode?.finish()
+        super.onDestroy()
+    }
 }
