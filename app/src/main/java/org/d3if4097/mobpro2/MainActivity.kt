@@ -2,7 +2,7 @@ package org.d3if4097.mobpro2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import org.d3if4097.mobpro2.databinding.ActivityMainBinding
+import com.google.samples.propertyanimation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
