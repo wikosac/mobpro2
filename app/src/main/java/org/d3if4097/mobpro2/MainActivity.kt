@@ -4,11 +4,14 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import com.google.samples.propertyanimation.R
 import com.google.samples.propertyanimation.databinding.ActivityMainBinding
 
@@ -38,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         translateButton.setOnClickListener { translater() }
         scaleButton.setOnClickListener { scaler() }
         fadeButton.setOnClickListener { fader() }
+        colorizeButton.setOnClickListener { colorizer() }
     }
 
     private fun ObjectAnimator.disableViewDuringAnimation(view: View) {
@@ -82,5 +86,19 @@ class MainActivity : AppCompatActivity() {
         animator.repeatMode = ObjectAnimator.REVERSE
         animator.disableViewDuringAnimation(fadeButton)
         animator.start()
+    }
+    private fun colorizer() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            var animator = ObjectAnimator.ofArgb(star.parent,
+                "backgroundColor", Color.BLACK, Color.RED)
+            animator.setDuration(500)
+            animator.repeatCount = 1
+            animator.repeatMode = ObjectAnimator.REVERSE
+            animator.disableViewDuringAnimation(colorizeButton)
+            animator.start()
+        } else{
+            Toast.makeText(this, getString(R.string.cannot_animate),
+                Toast.LENGTH_SHORT).show()
+        }
     }
 }

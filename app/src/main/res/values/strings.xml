@@ -22,4 +22,5 @@
     <string name="fade">Fade</string>
     <string name="shower">Shower</string>
     <string name="sky_color">Sky Color</string>
+    <string name="cannot_animate">Animation is not supported</string>
 </resources>
