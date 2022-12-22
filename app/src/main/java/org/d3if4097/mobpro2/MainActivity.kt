@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         rotateButton.setOnClickListener { rotater() }
         translateButton.setOnClickListener { translater() }
         scaleButton.setOnClickListener { scaler() }
+        fadeButton.setOnClickListener { fader() }
     }
 
     private fun ObjectAnimator.disableViewDuringAnimation(view: View) {
@@ -73,6 +74,13 @@ class MainActivity : AppCompatActivity() {
         animator.repeatCount = 1
         animator.repeatMode = ObjectAnimator.REVERSE
         animator.disableViewDuringAnimation(scaleButton)
+        animator.start()
+    }
+    private fun fader() {
+        val animator = ObjectAnimator.ofFloat(star, View.ALPHA, 0f)
+        animator.repeatCount = 1
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.disableViewDuringAnimation(fadeButton)
         animator.start()
     }
 }
