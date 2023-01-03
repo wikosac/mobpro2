@@ -1,9 +1,11 @@
 package org.d3if4097.mobpro2
 
+import android.app.NotificationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.firebase.ui.auth.AuthUI
@@ -12,6 +14,7 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import org.d3if4097.mobpro2.databinding.ActivityMainBinding
+import org.d3if4097.mobpro2.notify.sendNotification
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.login.setOnClickListener { mulaiLogin() }
         binding.logout.setOnClickListener { AuthUI.getInstance().signOut(this) }
+        binding.notify.setOnClickListener { tampilNotifikasi() }
 
         viewModel.authState.observe(this, { updateUI(it) })
     }
@@ -55,5 +59,11 @@ class MainActivity : AppCompatActivity() {
             .setAvailableProviders(providers)
             .build()
         signInLauncher.launch(intent)
+    }
+
+    private fun tampilNotifikasi() {
+        val notificationManager = ContextCompat.getSystemService(this, NotificationManager::class.java)
+        notificationManager?.sendNotification(this)
+        Log.d("notif", "tampilNotifikasi: ")
     }
 }
