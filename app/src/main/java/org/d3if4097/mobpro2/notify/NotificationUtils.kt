@@ -1,5 +1,6 @@
 package org.d3if4097.mobpro2.notify
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -14,11 +15,11 @@ import org.d3if4097.mobpro2.R
 
 private const val NOTIFICATION_ID = 0
 
-@RequiresApi(Build.VERSION_CODES.M)
+@SuppressLint("UnspecifiedImmutableFlag")
 fun NotificationManager.sendNotification(context: Context) {
     val intent = Intent(context, MainActivity::class.java)
     val pendingIntent = PendingIntent.getActivity(context,
-        NOTIFICATION_ID, intent, PendingIntent.FLAG_IMMUTABLE)
+        NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
     val builder = NotificationCompat.Builder(
         context,
