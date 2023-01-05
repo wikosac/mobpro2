@@ -9,4 +9,7 @@
     <string name="notif_channel_name">Reminder</string>
     <string name="notif_channel_desc">Reminder check-in tiap beberapa jam.</string>
     <string name="checkin_sekarang">Check-in Sekarang</string>
+    <string name="news_channel_id" translatable="false">news</string>
+    <string name="news_channel_name">Pengumuman</string>
+    <string name="news_channel_desc">Pengumuman penting terkait kampus.</string>
 </resources>
