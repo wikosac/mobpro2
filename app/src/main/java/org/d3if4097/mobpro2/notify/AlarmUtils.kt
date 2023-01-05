@@ -32,4 +32,14 @@ object AlarmUtils {
         }
         return calendar.timeInMillis
     }
+    fun setAlarmOff(context: Context) {
+        val intent = Intent(context, ReminderReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE,
+            intent, PendingIntent.FLAG_IMMUTABLE)
+        val manager = context.getSystemService(Context.ALARM_SERVICE)
+                as? AlarmManager
+        if (pendingIntent != null && manager != null) {
+            manager.cancel(pendingIntent)
+        }
+    }
 }

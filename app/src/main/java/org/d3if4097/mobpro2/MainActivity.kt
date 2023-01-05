@@ -37,19 +37,20 @@ class MainActivity : AppCompatActivity() {
         binding.logout.setOnClickListener { AuthUI.getInstance().signOut(this) }
 
         viewModel.authState.observe(this) { updateUI(it) }
-        AlarmUtils.setAlarm(this)
     }
 
     private fun updateUI(user: FirebaseUser?) = with(binding) {
         if (user == null) {
             userGroup.visibility = View.GONE
             login.visibility = View.VISIBLE
+            AlarmUtils.setAlarmOff(this@MainActivity)
         }
         else {
             namaTextView.text = user.displayName
             Glide.with(this@MainActivity).load(user.photoUrl).into(imageView)
             userGroup.visibility = View.VISIBLE
             login.visibility = View.GONE
+            AlarmUtils.setAlarm(this@MainActivity)
         }
     }
 
