@@ -1,10 +1,12 @@
 package org.d3if4097.mobpro2
 
 import android.app.NotificationManager
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -27,6 +29,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    companion object {
+        private const val CHECK_IN_URL = "https://checkin.telkomuniversity.ac.id"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.login.setOnClickListener { mulaiLogin() }
         binding.logout.setOnClickListener { AuthUI.getInstance().signOut(this) }
+        binding.checkin.setOnClickListener { checkInSekarang() }
 
         viewModel.authState.observe(this) { updateUI(it) }
     }
@@ -61,5 +68,10 @@ class MainActivity : AppCompatActivity() {
             .setAvailableProviders(providers)
             .build()
         signInLauncher.launch(intent)
+    }
+
+    private fun checkInSekarang() {
+        val intent = CustomTabsIntent.Builder().build()
+        intent.launchUrl(this, Uri.parse(CHECK_IN_URL))
     }
 }
