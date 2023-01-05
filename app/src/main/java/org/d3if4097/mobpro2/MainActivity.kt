@@ -1,6 +1,7 @@
 package org.d3if4097.mobpro2
 
 import android.app.NotificationManager
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import org.d3if4097.mobpro2.databinding.ActivityMainBinding
 import org.d3if4097.mobpro2.notify.AlarmUtils
+import org.d3if4097.mobpro2.notify.FcmService
 import org.d3if4097.mobpro2.notify.createChannel
 import org.d3if4097.mobpro2.notify.sendNotification
 
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         binding.checkin.setOnClickListener { checkInSekarang() }
 
         viewModel.authState.observe(this) { updateUI(it) }
+        tanganiPengumuman(intent)
 
         // Pembuatan channel baru (news)
         createChannel(
@@ -89,5 +92,12 @@ class MainActivity : AppCompatActivity() {
     private fun checkInSekarang() {
         val intent = CustomTabsIntent.Builder().build()
         intent.launchUrl(this, Uri.parse(CHECK_IN_URL))
+    }
+
+    private fun tanganiPengumuman(intent: Intent) {
+        if (!intent.hasExtra(FcmService.KEY_URL)) return
+        val url = intent.getStringExtra(FcmService.KEY_URL) ?: return
+        val tabsIntent = CustomTabsIntent.Builder().build()
+        tabsIntent.launchUrl(this, Uri.parse(url))
     }
 }
