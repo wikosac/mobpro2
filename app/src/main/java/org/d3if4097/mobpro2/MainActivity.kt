@@ -100,4 +100,11 @@ class MainActivity : AppCompatActivity() {
         val tabsIntent = CustomTabsIntent.Builder().build()
         tabsIntent.launchUrl(this, Uri.parse(url))
     }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if (intent != null) {
+            tanganiPengumuman(intent)
+        }
+    }
 }
