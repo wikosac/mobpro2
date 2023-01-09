@@ -14,6 +14,7 @@ import org.d3if4097.mobpro2.MainActivity
 import org.d3if4097.mobpro2.R
 
 private const val NOTIFICATION_ID = 0
+private const val PENGUMUMAN_ID = 1
 
 @SuppressLint("UnspecifiedImmutableFlag")
 fun NotificationManager.sendNotification(context: Context) {
@@ -32,6 +33,27 @@ fun NotificationManager.sendNotification(context: Context) {
         .setAutoCancel(true)
 
     notify(NOTIFICATION_ID, builder.build())
+}
+
+@SuppressLint("UnspecifiedImmutableFlag")
+fun NotificationManager.sendNotification(context: Context,
+                                         title: String, body: String, url: String) {
+    val intent = Intent(context, MainActivity::class.java)
+    intent.putExtra(FcmService.KEY_URL, url)
+    val pendingIntent = PendingIntent.getActivity(
+        context,
+        PENGUMUMAN_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT
+    )
+    val builder = NotificationCompat.Builder(
+        context,
+        context.getString(R.string.news_channel_id)
+    )
+        .setSmallIcon(R.mipmap.ic_launcher_round)
+        .setContentTitle(title)
+        .setContentText(body)
+        .setContentIntent(pendingIntent)
+        .setAutoCancel(true)
+    notify(PENGUMUMAN_ID, builder.build())
 }
 
 fun createChannel(context: Context, idRes:Int, nameRes: Int, descRes: Int) {
