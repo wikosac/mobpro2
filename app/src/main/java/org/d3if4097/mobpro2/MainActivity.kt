@@ -1,8 +1,10 @@
 package org.d3if4097.mobpro2
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -20,6 +22,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import org.d3if4097.mobpro2.databinding.ActivityMainBinding
+import org.d3if4097.mobpro2.widget.WidgetUtils
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,6 +33,10 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
+    }
+
+    private val prefs: SharedPreferences by lazy {
+        PreferenceManager.getDefaultSharedPreferences(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,9 +85,12 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected() {}
         })
 
-        viewModel.getData().observe(this, { myAdapter.setData(it) })
-        viewModel.getStatus().observe(this, { updateProgress(it) })
-        viewModel.getEntries().observe(this, { updateChart(it) })
+        viewModel.getData().observe(this) {
+            myAdapter.setData(it)
+            WidgetUtils.saveData(prefs, it.last())
+        }
+        viewModel.getStatus().observe(this) { updateProgress(it) }
+        viewModel.getEntries().observe(this) { updateChart(it) }
     }
 
     private fun updateProgress(status: ApiStatus) {
