@@ -15,6 +15,13 @@ import java.util.*
 class CovidWidgetProvider : AppWidgetProvider() {
 
     companion object {
+        fun updateAllWidget(context: Context, manager: AppWidgetManager,
+                            ids: IntArray) {
+            for (id in ids) {
+                updateAppWidget(context, manager, id)
+            }
+        }
+
         private fun updateAppWidget(context: Context,
                                     manager: AppWidgetManager, id: Int) {
             val intent = Intent(context, MainActivity::class.java)
@@ -56,8 +63,6 @@ class CovidWidgetProvider : AppWidgetProvider() {
 
     override fun onUpdate(context: Context?, manager: AppWidgetManager?, ids: IntArray?) {
         if (context == null || manager == null || ids == null) return
-        for (id in ids) {
-            updateAppWidget(context, manager, id)
-        }
+        updateAllWidget(context, manager, ids)
     }
 }
