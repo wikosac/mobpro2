@@ -4,8 +4,8 @@ import android.content.SharedPreferences
 import org.d3if4097.mobpro2.model.Harian
 
 object WidgetUtils {
-    private const val KEY_DATE = "date"
-    private const val KEY_DATA = "data"
+    const val KEY_DATE = "date"
+    const val KEY_DATA = "data"
     fun saveData(sharedPref: SharedPreferences, data: Harian) {
         with(sharedPref.edit()) {
             putLong(KEY_DATE, data.key)
