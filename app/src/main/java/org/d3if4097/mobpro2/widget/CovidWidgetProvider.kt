@@ -1,12 +1,18 @@
 package org.d3if4097.mobpro2.widget
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.RemoteViews
 import androidx.preference.PreferenceManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.d3if4097.mobpro2.Covid19Api
 import org.d3if4097.mobpro2.MainActivity
 import org.d3if4097.mobpro2.R
 import java.text.SimpleDateFormat
@@ -22,6 +28,7 @@ class CovidWidgetProvider : AppWidgetProvider() {
             }
         }
 
+        @SuppressLint("UnspecifiedImmutableFlag")
         private fun updateAppWidget(context: Context,
                                     manager: AppWidgetManager, id: Int) {
             val intent = Intent(context, MainActivity::class.java)
@@ -34,6 +41,13 @@ class CovidWidgetProvider : AppWidgetProvider() {
             val date = prefs.getLong(WidgetUtils.KEY_DATE, -1L)
             val data = prefs.getInt(WidgetUtils.KEY_DATA, -1)
             updateUI(context, views, date, data)
+
+            val intentRefresh = Intent(context, CovidWidgetProvider::class.java)
+            intentRefresh.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+            intentRefresh.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intArrayOf(id))
+            val pendingRefresh = PendingIntent.getBroadcast(context, id,
+                intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT)
+            views.setOnClickPendingIntent(R.id.refreshButton, pendingRefresh)
 
             manager.updateAppWidget(id, views)
         }
@@ -63,6 +77,19 @@ class CovidWidgetProvider : AppWidgetProvider() {
 
     override fun onUpdate(context: Context?, manager: AppWidgetManager?, ids: IntArray?) {
         if (context == null || manager == null || ids == null) return
-        updateAllWidget(context, manager, ids)
+
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val result = Covid19Api.service.getData()
+                WidgetUtils.saveData(prefs, result.update.harian.last())
+            }
+            catch (e: Exception) {
+                Log.e("CovidWidgetProvider", "Error: ${e.message}")
+            }
+            finally {
+                updateAllWidget(context, manager, ids)
+            }
+        }
     }
 }
