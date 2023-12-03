@@ -6,6 +6,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import org.d3if4097.mobpro2.databinding.ActivityMainBinding
@@ -18,6 +21,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var cameraProvider: ProcessCameraProvider
+    private lateinit var preview: Preview
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -59,6 +65,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startCamera() {
-        Log.d("KAMERA", "Izin kamera telah diberikan.")
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+        cameraProviderFuture.addListener({
+            cameraProvider = cameraProviderFuture.get()
+
+            preview = Preview.Builder().build()
+            preview.setSurfaceProvider(binding.imageView.surfaceProvider)
+
+            cameraLive()
+        }, ContextCompat.getMainExecutor(this))
+    }
+
+    private fun cameraLive() {
+        val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
+        try {
+            cameraProvider.unbindAll()
+            cameraProvider.bindToLifecycle(this, cameraSelector, preview)
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error kamera: " + e.message)
+        }
     }
 }
