@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MobPro2</string>
+    <string name="tidak_mendapat_izin_kamera">Tidak mendapat izin kamera</string>
+    <string name="mulai">Mulai</string>
 </resources>
