@@ -11,7 +11,7 @@ import retrofit2.http.GET
 enum class ApiStatus { LOADING, SUCCESS, FAILED }
 
 object Covid19Api {
-    private const val BASE_URL = "https://data.covid19.go.id/public/api/"
+    private const val BASE_URL = "https://raw.githubusercontent.com/indraazimi/mobpro2/static-api/"
 
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())

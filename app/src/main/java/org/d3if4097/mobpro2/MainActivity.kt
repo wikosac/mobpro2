@@ -2,13 +2,12 @@ package org.d3if4097.mobpro2
 
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -24,7 +23,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import org.d3if4097.mobpro2.databinding.ActivityMainBinding
 import org.d3if4097.mobpro2.widget.WidgetUtils
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,6 +1,5 @@
 package org.d3if4097.mobpro2.widget
 
-import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
@@ -16,7 +15,7 @@ import org.d3if4097.mobpro2.Covid19Api
 import org.d3if4097.mobpro2.MainActivity
 import org.d3if4097.mobpro2.R
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
 
 class CovidWidgetProvider : AppWidgetProvider() {
 
@@ -28,12 +27,10 @@ class CovidWidgetProvider : AppWidgetProvider() {
             }
         }
 
-        @SuppressLint("UnspecifiedImmutableFlag")
-        private fun updateAppWidget(context: Context,
-                                    manager: AppWidgetManager, id: Int) {
+        private fun updateAppWidget(context: Context, manager: AppWidgetManager, id: Int) {
             val intent = Intent(context, MainActivity::class.java)
             val pendingIntent = PendingIntent.getActivity(
-                context, 0, intent, 0)
+                context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
             val views = RemoteViews(context.packageName, R.layout.widget_main)
             views.setOnClickPendingIntent(R.id.dataPanel, pendingIntent)
 
@@ -46,7 +43,7 @@ class CovidWidgetProvider : AppWidgetProvider() {
             intentRefresh.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
             intentRefresh.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intArrayOf(id))
             val pendingRefresh = PendingIntent.getBroadcast(context, id,
-                intentRefresh, PendingIntent.FLAG_UPDATE_CURRENT)
+                intentRefresh, PendingIntent.FLAG_IMMUTABLE)
             views.setOnClickPendingIntent(R.id.refreshButton, pendingRefresh)
 
             manager.updateAppWidget(id, views)

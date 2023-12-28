@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import org.d3if4097.mobpro2.databinding.ItemMainBinding
 import org.d3if4097.mobpro2.model.Harian
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     private val formatter = SimpleDateFormat("dd MMMM", Locale("ID", "id"))
