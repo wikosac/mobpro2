@@ -1,23 +1,17 @@
 package org.d3if4097.mobpro2
 
-import android.app.NotificationManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
-import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import org.d3if4097.mobpro2.databinding.ActivityMainBinding
 import org.d3if4097.mobpro2.notify.AlarmUtils
-import org.d3if4097.mobpro2.notify.sendNotification
 
 class MainActivity : AppCompatActivity() {
 

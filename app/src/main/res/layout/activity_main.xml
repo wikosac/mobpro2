@@ -33,6 +33,7 @@
         tools:src="@mipmap/ic_launcher_round" />
 
     <Button
+        android:visibility="gone"
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,8 +41,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/logout"
@@ -87,5 +87,5 @@
         android:id="@+id/userGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="namaTextView,imageView,logout,divider, notify"/>
+        app:constraint_referenced_ids="namaTextView,imageView,logout,divider, checkin"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
